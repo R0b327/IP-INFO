@@ -49,7 +49,6 @@ class IP_Info:
 				exit(f"{LB}[{LR}!{LB}]{LR} Invalid IP Address, Try again.")
 			else:
 				resp = requests.get(f"http://ip-api.com/json/{self._ip}?fields=status,message,continent,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,currency,isp,as,mobile,proxy,query,asname", headers=UA, timeout=30).json()
-				resp2 = requests.get(f"https://ipinfo.io/{self._ip}/json?token=5c55b33f306004", headers=UA, timeout=30).json()
 		except requests.ConnectError:
 			exit(f"{LB}[{LR}!{LB}]{LR} Internet Connection Error, Try again.")
 		except requests.ConnectTimeout:
@@ -64,14 +63,9 @@ class IP_Info:
 
 {LB}[{LG}+{LB}]{LG} ISP{LR}:{LC} {resp['isp']}
 {LB}[{LG}+{LB}]{LG} ASN{LR}:{LC} {resp['as']} {resp['asname']}
-{LB}[{LG}+{LB}]{LG} Domain{LR}:{LC} {resp2['asn']['domain']}
-{LB}[{LG}+{LB}]{LG} Route{LR}:{LC} {resp2['asn']['route']}
-{LB}[{LG}+{LB}]{LG} Company{LR}:{LC} {resp2['company']['name']}
 
 {LB}[{LG}+{LB}]{LG} Mobile{LR}:{LC} {resp['mobile']}
 {LB}[{LG}+{LB}]{LG} VPN{LR}:{LC} {resp['proxy']}
-{LB}[{LG}+{LB}]{LG} Tor{LR}:{LC} {resp2['privacy']['tor']}
-{LB}[{LG}+{LB}]{LG} Hosting{LR}:{LC} {resp2['privacy']['hosting']}
 
 {LB}[{LG}+{LB}]{LG} Google Map{LR}:{LC} https://www.google.com/maps/place/{str(resp['lat'])},{str(resp['lon'])}
 		"""
